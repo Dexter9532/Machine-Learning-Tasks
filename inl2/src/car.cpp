@@ -2,7 +2,8 @@
 
 
 namespace vehicle {
-
+    
+//--------------------------------------------------------------------------------//
 Car::Car(const std::string& brand,
     const std::string& model,
     const std::string& color,
@@ -15,41 +16,50 @@ Car::Car(const std::string& brand,
       myTransmissionType(transmission)
 {
 }
+
+//--------------------------------------------------------------------------------//
 const std::string& Car::getBrand() const 
 {
     return myBrand;
 }
 
+//--------------------------------------------------------------------------------//
 const std::string& Car::getModel() const
 {
     return myModel;
 }
 
+//--------------------------------------------------------------------------------//
 const std::string& Car::getColor() const
 {
     return myColor;
 }
 
+//--------------------------------------------------------------------------------//
 unsigned Car::getYearOfLaunch() const
 {
     return myYearOfLaunch;
 }
 
+//--------------------------------------------------------------------------------//
 TransmissionType Car::getTransmissionType() const
 {
     return myTransmissionType;
 }
 
+//--------------------------------------------------------------------------------//
 void Car::setColor(const std::string& color)
 {
     myColor = color;
 }
 
+//--------------------------------------------------------------------------------//
 void Car::setTransmissionType(TransmissionType Transmission)
 {
     myTransmissionType = Transmission;
 }
 
+//--------------------------------------------------------------------------------//
 void Car::print(std::ostream& out) const
 {
     out << "--------------------------------------------------------------------------------\n";
