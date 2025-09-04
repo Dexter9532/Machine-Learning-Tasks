@@ -1,7 +1,7 @@
 default: build run
 
 build:
-	@gcc++ main.cpp -o main -Wall -Werror
+	@g++ src/main.cpp src/car.cpp -o main -Wall -Werror -Iinc
 
 run:
 	@./main
