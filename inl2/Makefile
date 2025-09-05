@@ -1,11 +1,19 @@
+TARGET := main
+
+SOURCE_FILES := src/main.cpp \
+                src/car.cpp
+
+COMPILER_FLAGS := -Wall -Werror
+
+INCLUDE_DIRS := -Iinc/
+
 default: build run
 
 build:
-	@g++ src/main.cpp src/car.cpp -o main -Wall -Werror -Iinc
+	@g++ $(SOURCE_FILES) -o $(TARGET) $(INCLUDE_DIRS) $(COMPILER_FLAGS)
 
 run:
-	@./main
+	@./$(TARGET)
 
-clean:
-	@rm -f main
-	
+clean:l
+	@rm -f $(TARGET)
