@@ -8,59 +8,59 @@ Car::Car(const std::string& brand,
     const std::string& model,
     const std::string& color,
     unsigned yearOfLaunch,
-    TransmissionType transmission)
-    : myBrand(brand),
-      myModel(model),
-      myColor(color),
-      myYearOfLaunch(yearOfLaunch),
-      myTransmissionType(transmission)
+    TransmissionType transmission) noexcept
+    : myBrand{brand},
+      myModel{model},
+      myColor{color},
+      myYearOfLaunch{yearOfLaunch},
+      myTransmissionType{transmission}
 {
 }
 
 //--------------------------------------------------------------------------------//
-const std::string& Car::getBrand() const 
+const std::string& Car::getBrand() const noexcept
 {
     return myBrand;
 }
 
 //--------------------------------------------------------------------------------//
-const std::string& Car::getModel() const
+const std::string& Car::getModel() const noexcept
 {
     return myModel;
 }
 
 //--------------------------------------------------------------------------------//
-const std::string& Car::getColor() const
+const std::string& Car::getColor() const noexcept
 {
     return myColor;
 }
 
 //--------------------------------------------------------------------------------//
-unsigned Car::getYearOfLaunch() const
+unsigned Car::getYearOfLaunch() const noexcept
 {
     return myYearOfLaunch;
 }
 
 //--------------------------------------------------------------------------------//
-TransmissionType Car::getTransmissionType() const
+TransmissionType Car::getTransmissionType() const noexcept
 {
     return myTransmissionType;
 }
 
 //--------------------------------------------------------------------------------//
-void Car::setColor(const std::string& color)
+void Car::setColor(const std::string& color) noexcept
 {
     myColor = color;
 }
 
 //--------------------------------------------------------------------------------//
-void Car::setTransmissionType(TransmissionType Transmission)
+void Car::setTransmissionType(TransmissionType Transmission) noexcept
 {
     myTransmissionType = Transmission;
 }
 
 //--------------------------------------------------------------------------------//
-void Car::print(std::ostream& out) const
+void Car::print(std::ostream& out) const noexcept
 {
     out << "--------------------------------------------------------------------------------\n";
     out << "Brand: "                << myBrand              << "\n";
