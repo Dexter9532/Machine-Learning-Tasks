@@ -1,5 +1,4 @@
 #include "ml/lin_reg/lin_reg.h"
-#include <algorithm>
 
 namespace ml::lin_reg
 {
