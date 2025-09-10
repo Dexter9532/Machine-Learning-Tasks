@@ -63,5 +63,14 @@ int main()
     
     // Perform prediction with the model, then terminate the program.
     printPredictions(linReg, trainInput);
+
+    // No epochs set
+    ml::lin_reg::LinReg linRegNoEpoch{trainInput, trainOutput};
+    if (!linRegNoEpoch.trainWithNoEpoch(learningRate)) {
+        std::cout << "Training with no epochs failed!\n";
+        return -1;
+    }
+    std::cout << "Training with no epochs finished!\n";
+    printPredictions(linRegNoEpoch, trainInput);
     return 0;
 }
