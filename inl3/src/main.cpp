@@ -15,7 +15,7 @@ namespace
  * @param[in] inputData Input data to predict with.
  * @param[in] ostream Output stream to use (default = terminal print).
  */
-void predict(const ml::lin_reg::Interface& linReg, const std::vector<double>& inputData,
+void printPredictions(const ml::lin_reg::Interface& linReg, const std::vector<double>& inputData,
              std::ostream& ostream = std::cout) noexcept
 {
     // Terminate the function if no input data is provided.
@@ -44,8 +44,8 @@ void predict(const ml::lin_reg::Interface& linReg, const std::vector<double>& in
 int main()
 {
     // Implement the number of epochs to train and the learning rate as compile-time constants.
-    constexpr std::size_t epochCount{1000};
-    constexpr double learningRate{0.1};
+    constexpr std::size_t epochCount{50};
+    constexpr double learningRate{0.2};
 
     // Create training data vectors.
     const std::vector<double> trainInput{0, 1, 2, 3, 4};
@@ -62,6 +62,6 @@ int main()
     }
     
     // Perform prediction with the model, then terminate the program.
-    predict(linReg, trainInput);
+    printPredictions(linReg, trainInput);
     return 0;
 }

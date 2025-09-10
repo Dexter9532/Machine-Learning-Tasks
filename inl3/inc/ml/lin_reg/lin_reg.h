@@ -46,7 +46,7 @@ public:
      * @param [in] epochCount Indicates how many epochs that will be used.
      * @param [in] learingRate Learingrate speed, default is 0.01 or 1%.
      */
-    bool train(unsigned epochCount, double learningRate = 0.01) noexcept;
+    bool train(const std::size_t epochCount = 1U, double learningRate = 0.01) noexcept;
 
     LinReg() = delete;                            // Delete a car without info.
     LinReg(const LinReg&) = delete;               // Delete copy constructor.
