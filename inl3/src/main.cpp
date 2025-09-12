@@ -32,6 +32,7 @@ void printPredictions(const ml::lin_reg::Interface& linReg, const std::vector<do
         const auto prediction{linReg.predict(input)};
         ostream << "Input: " << input << ", predicted output: " << prediction << "\n";
     }
+    std::cout << "Epochs used: " << linReg.getEpochsUsed() << "\n";
     ostream << "--------------------------------------------------------------------------------\n\n";
 }
 } // namespace
@@ -73,4 +74,5 @@ int main()
     std::cout << "Training with no epochs finished!\n";
     printPredictions(linRegNoEpoch, trainInput);
     return 0;
+
 }

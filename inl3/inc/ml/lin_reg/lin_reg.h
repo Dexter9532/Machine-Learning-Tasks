@@ -45,7 +45,7 @@ public:
      * 
      * @return Return true if predict is right, return false outerwise.
      */
-    bool isPredictDone(const std::vector<double>& yPredVector, const std::vector<double>& yPref ) const noexcept;
+    bool isPredictDone() const noexcept;
 
     /**
      * @brief Method to train the module.
@@ -61,7 +61,14 @@ public:
      * @param [in] learingRate Learingrate speed, default is 0.01 or 1%.
      */
     bool trainWithNoEpoch(double learningRate = 0.01) noexcept;
-
+    
+    /**
+     * @brief Function to return the amount of epochs used.
+     * 
+     * @return Return the value of the variable epochsused,
+     * specified epochs are used then return the value of the given amount.
+     */
+    int getEpochsUsed() const noexcept override;
 
     LinReg() = delete;                            // Delete a car without info.
     LinReg(const LinReg&) = delete;               // Delete copy constructor.
@@ -77,7 +84,8 @@ private:
     double myWeight;                                    // Weight value for the module, (k) in the ecvation kc + m = y.
     std::vector<double> myLastPredict;                  // Reference to the last data the modlue has between epochs.
     int myEpochsUsed{0};                                // To save the amount of epochs that are used for the specific traingmodule.
-    std::vector<double> myPredVector;                   // senaste prediktionerna
+    std::vector<double> myPredVector;                   // Last predict.
+    std::size_t myEpochCount{0};                        // The specified amount of epochs that the module should use.   
 
 };
 } // Namespace ml::lin_reg

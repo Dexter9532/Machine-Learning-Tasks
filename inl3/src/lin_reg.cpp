@@ -1,5 +1,6 @@
 #include "ml/lin_reg/lin_reg.h"
 #include <vector>
+#include <cmath>
 
 namespace ml::lin_reg
 {
@@ -25,7 +26,7 @@ bool LinReg::trainWithNoEpoch(double learningRate) noexcept
 {
     if ((0.0 >= learningRate)) { return false;}
 
-    while (isPredictDone(myPredVector, myTrainOutput) == false)
+    while (!isPredictDone())
     {
         for (std::size_t i{}; i < myTrainSetCount; i++)
         {
@@ -40,10 +41,11 @@ bool LinReg::trainWithNoEpoch(double learningRate) noexcept
 
             // k = k + e * LR * x.
             myWeight = myWeight + (e * learningRate * myTrainInput[i]); 
-
-            // Save epochs used.
-            myEpochsUsed++;
+            
+            myPredVector[i] = predict(myTrainInput[i]);
         }
+        // Save epochs used.
+        myEpochsUsed++;
     }
     return true;    
 }
@@ -52,7 +54,8 @@ bool LinReg::train(const std::size_t epochCount, double learningRate) noexcept
 {
     if ((0U == epochCount) || (0.0 >= learningRate)) { return false;}
     
-    // Detta ska ska varje epok. Hur ser vi till att köra epochCount varv.
+    myEpochCount = epochCount;   
+
     for (std::size_t epoch{}; epoch < epochCount; epoch++)
     {
         for (std::size_t i{}; i < myTrainSetCount; i++)
@@ -73,17 +76,26 @@ bool LinReg::train(const std::size_t epochCount, double learningRate) noexcept
     return true;
 }
 //--------------------------------------------------------------------------------//
-bool LinReg::isPredictDone(const std::vector<double>& yPredVector, const std::vector<double>& yPref ) const noexcept
+bool LinReg::isPredictDone() const noexcept
 {
-    for (std::size_t i{}; i < yPredVector.size(); i++)
+    constexpr double tol = 1e-6;
+    for (std::size_t i{}; i < myTrainSetCount; ++i)
     {
-        auto yWantedZero = (yPredVector[i] - yPref[i]);
-        if (0.0 != yWantedZero )
+        if (std::abs(myPredVector[i] - myTrainOutput[i]) > tol)
         {
             return false;
         }
     }
-return true;
+    return true;
+}
+//--------------------------------------------------------------------------------//
+int LinReg::getEpochsUsed() const noexcept 
+{
+    if (myEpochsUsed == 0)
+    { 
+        return myEpochCount;
+    } 
+    return myEpochsUsed;
 }
 //--------------------------------------------------------------------------------//
 } //namespace ml::lin_reg

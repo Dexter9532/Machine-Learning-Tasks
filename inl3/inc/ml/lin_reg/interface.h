@@ -13,6 +13,13 @@ public:
     virtual ~Interface() noexcept = default;
 
     /**
+     * @brief Function to return the amount of epochs used.
+     * 
+     * @return Return the value of the variable epochsused.
+     */
+    virtual int getEpochsUsed() const noexcept = 0;
+
+    /**
      * @brief Predict module.
      * 
      * @param[in] input The given data is what the module should base it´s predict on.
