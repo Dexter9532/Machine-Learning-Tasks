@@ -2,7 +2,7 @@
 
 
 namespace vehicle {
-    
+
 //--------------------------------------------------------------------------------//
 Car::Car(const std::string& brand,
     const std::string& model,
@@ -76,6 +76,5 @@ void Car::print(std::ostream& out) const noexcept
     }
     out << "--------------------------------------------------------------------------------\n";
 }
-
 
 } // Namespace vehicle
