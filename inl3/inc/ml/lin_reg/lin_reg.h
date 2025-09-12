@@ -77,6 +77,12 @@ public:
     LinReg& operator=(LinReg&&) = delete;         // Delete move assignment.
 
 private:
+
+    /**
+     * @brief Function to shuffle the indexes of the vector.
+     */
+    void shuffleIndex() noexcept;
+
     const std::vector<double>& myTrainInput;            // Reference to the training data (input data).
     const std::vector<double>& myTrainOutput;           // Reference to the training data (output data).
     std::size_t myTrainSetCount;                        // Indicates the total of full trainingset that are avalible.
@@ -86,6 +92,7 @@ private:
     int myEpochsUsed{0};                                // To save the amount of epochs that are used for the specific traingmodule.
     std::vector<double> myPredVector;                   // Last predict.
     std::size_t myEpochCount{0};                        // The specified amount of epochs that the module should use.   
+    std::vector<std::size_t> myIndex;                   // Vector that holds the amount of indexes in traingvector to shuffle.
 
 };
 } // Namespace ml::lin_reg

@@ -1,6 +1,8 @@
 #include "ml/lin_reg/lin_reg.h"
 #include <vector>
 #include <cmath>
+#include <algorithm> // for std::shuffle
+#include <random>
 
 namespace ml::lin_reg
 {
@@ -15,6 +17,13 @@ LinReg::LinReg(const std::vector<double>& trainInput,
                     myWeight{0.5},
                     myPredVector(myTrainSetCount)
 {
+    myIndex.reserve(myTrainSetCount); // Tell vector how many elements it will contain to not allocate vector. 
+
+    // Loop to add the indexes in the trainingdata to the vector myIndex.
+    for (std::size_t i{0}; i < myTrainSetCount; i++)
+    {
+        myIndex.push_back(i);
+    }
 }   
 //--------------------------------------------------------------------------------//
 double LinReg::predict(const double input) const noexcept
@@ -28,8 +37,10 @@ bool LinReg::trainWithNoEpoch(double learningRate) noexcept
 
     while (!isPredictDone())
     {
-        for (std::size_t i{}; i < myTrainSetCount; i++)
+        shuffleIndex();
+        for (std::size_t k{}; k < myTrainSetCount; k++)
         {
+            const std::size_t i = myIndex[k];
             // ypred = kx + m.
             const auto yPred = predict(myTrainInput[i]);
 
@@ -58,8 +69,12 @@ bool LinReg::train(const std::size_t epochCount, double learningRate) noexcept
 
     for (std::size_t epoch{}; epoch < epochCount; epoch++)
     {
-        for (std::size_t i{}; i < myTrainSetCount; i++)
+        shuffleIndex();
+        for (std::size_t k{}; k < myTrainSetCount; k++)
         {
+            // Use random index.
+            const std::size_t i = myIndex[k];
+
             // ypred = kx + m.
             const auto yPred = predict(myTrainInput[i]);
 
@@ -98,5 +113,11 @@ int LinReg::getEpochsUsed() const noexcept
     return myEpochsUsed;
 }
 //--------------------------------------------------------------------------------//
+void LinReg::shuffleIndex() noexcept
+{
+    static std::mt19937 gen{std::random_device{}()};
+    std::shuffle(myIndex.begin(), myIndex.end(), gen);
+
+}
 } //namespace ml::lin_reg
 
