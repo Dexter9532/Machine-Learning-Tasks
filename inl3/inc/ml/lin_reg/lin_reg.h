@@ -1,7 +1,13 @@
+//! @note Utmärkt, mycket bra kod och väl dokumenterat. Jag kommenterade bara några smågrejer.
+
 /**
  * @brief File to define the subclass named LinReg
  */
 #pragma once
+
+//! @note Lade till ett mellanrum mellan #pragma once och dina include-direktiv.
+
+//! @note Sortera gärna dina headers alfabetiskt, börja också med standardbiblioteken.
 #include "ml/lin_reg/interface.h"
 #include <vector>
 #include <algorithm> // for std::min
@@ -68,6 +74,7 @@ public:
      * @return Return the value of the variable epochsused,
      * specified epochs are used then return the value of the given amount.
      */
+    //! @note Använd hellre std::size_t (som jag skrev i interfacet).
     int getEpochsUsed() const noexcept override;
 
     LinReg() = delete;                            // Delete a car without info.
@@ -89,6 +96,7 @@ private:
     double myBias;                                      // Bias value for the module, (m) in the ecvation kx + m = y.
     double myWeight;                                    // Weight value for the module, (k) in the ecvation kc + m = y.
     std::vector<double> myLastPredict;                  // Reference to the last data the modlue has between epochs.
+    //! @note myEpochsUser bör vara av osignerad tal, exempelvis std::size_t.
     int myEpochsUsed{0};                                // To save the amount of epochs that are used for the specific traingmodule.
     std::vector<double> myPredVector;                   // Last predict.
     std::size_t myEpochCount{0};                        // The specified amount of epochs that the module should use.   

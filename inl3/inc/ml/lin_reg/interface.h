@@ -1,3 +1,5 @@
+//! @note Utmärkt, i princip klockrent!
+
 /**
  * @brief Interface for linear regression algorithms.
  */
@@ -17,6 +19,7 @@ public:
      * 
      * @return Return the value of the variable epochsused.
      */
+     //! @note En osignerad typ såsom std::size_t hade varit mer lämpligt här; detta är ett naturligt tal.
     virtual int getEpochsUsed() const noexcept = 0;
 
     /**
