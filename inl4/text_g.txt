@@ -1,0 +1,76 @@
+1 a)
+--------------------------------------------------------------------------------
+Input: 0, predicted output: -0.7824
+Input: 1, predicted output: 0.8144
+Input: 2, predicted output: 2.4112
+Input: 3, predicted output: 4.008
+Input: 4, predicted output: 5.6048
+Epochs used: 1
+--------------------------------------------------------------------------------
+Got the values using this function
+
+bool LinReg::train(const std::size_t epochCount, double learningRate) noexcept
+{
+    if ((0U == epochCount) || (0.0 >= learningRate)) { return false;}
+    
+    myEpochCount = epochCount;   
+
+    for (std::size_t epoch{}; epoch < epochCount; epoch++)
+    {
+        shuffleIndex();
+        for (std::size_t k{}; k < myTrainSetCount; k++)
+        {
+            // Use random index.
+            const std::size_t i = myIndex[k];
+
+            // ypred = kx + m.
+            const auto yPred = predict(myTrainInput[i]);
+
+            // e = yref - ypred.
+            const auto e = (myTrainOutput[i] - yPred);
+
+            // m = m + e * LR.
+            myBias = myBias + (e * learningRate);
+
+            // k = k + e * LR * x.
+            myWeight = myWeight + (e * learningRate * myTrainInput[i]); 
+        }
+    }
+    return true;
+}
+
+1 b)
+
+Training with no epochs finished!
+--------------------------------------------------------------------------------
+Input: -5, predicted output: -5
+Input: -4, predicted output: -4
+Input: -3, predicted output: -3
+Input: -2, predicted output: -2
+Input: -1, predicted output: -1
+Input: 0, predicted output: -3.99983e-08
+Input: 1, predicted output: 1
+Input: 2, predicted output: 2
+Input: 3, predicted output: 3
+Input: 4, predicted output: 4
+Input: 5, predicted output: 5
+Epochs used: 53
+--------------------------------------------------------------------------------
+used same same training as task a except i had the amount of epoch the algoritihm wanted to use
+
+
+2)
+Bias påverkar modellen som en konstant förskjutning uppåt eller nedåt, därför räcker det att justera
+den direkt efter felet. Vikten bestämmer däremot lutningen på linjen och påverkas 
+olika beroende på hur stor insignalen är – ju större insignal, desto mer bidrar vikten till felet. 
+Därför måste viktens uppdatering ta hänsyn till både felet och den aktuella insignalen.
+
+3a)
+När för snabb lärningshastighet används så kan modellen konstant overshute alltså att den blir för hög sen likadan för låg nästa gång, 
+detta kan göra att värdet blir unatainable. 
+
+b)
+Man bör minska antalet epoker om modellen börjar överträna (dvs. presterar sämre på testdata). 
+Lärhastigheten bör anpassas så att den inte är för hög (risk att modellen aldrig stabiliseras) och inte 
+för låg (risk att inlärningen tar onödigt lång tid). Vanligt är att använda en högre lärhastighet i början och sedan sänka den successivt när 
+antalet epoker ökar, så att modellen både kan lära sig snabbt och sedan finjusteras.

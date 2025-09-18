@@ -45,12 +45,12 @@ void printPredictions(const ml::lin_reg::Interface& linReg, const std::vector<do
 int main()
 {
     // Implement the number of epochs to train and the learning rate as compile-time constants.
-    constexpr std::size_t epochCount{50};
+    constexpr std::size_t epochCount{1};
     constexpr double learningRate{0.2};
 
     // Create training data vectors.
-    const std::vector<double> trainInput{0, 1, 2, 3, 4};
-    const std::vector<double> trainOutput{2, 4, 6, 8, 10};
+    const std::vector<double> trainInput{0, 1, 2, 3, 4, 5};
+    const std::vector<double> trainOutput{0, 1, 2, 3, 4, 5};
 
     // Create the linear regression model.
     ml::lin_reg::LinReg linReg{trainInput, trainOutput};
@@ -63,7 +63,8 @@ int main()
     }
     
     // Perform prediction with the model, then terminate the program.
-    printPredictions(linReg, trainInput);
+    const std::vector<double> verificationInputs{-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
+    printPredictions(linReg, verificationInputs);
 
     // No epochs set
     ml::lin_reg::LinReg linRegNoEpoch{trainInput, trainOutput};
@@ -72,7 +73,7 @@ int main()
         return -1;
     }
     std::cout << "Training with no epochs finished!\n";
-    printPredictions(linRegNoEpoch, trainInput);
+    printPredictions(linRegNoEpoch, verificationInputs);
     return 0;
 
 }
