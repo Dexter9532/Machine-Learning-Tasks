@@ -56,7 +56,7 @@ Input: 4, predicted output: 4
 Input: 5, predicted output: 5
 Epochs used: 53
 --------------------------------------------------------------------------------
-used same same training as task a except i had the amount of epoch the algoritihm wanted to use
+used same same training as task a except i had the amount of epoch used to how much the algoritihm wanted to use
 
 
 2)
