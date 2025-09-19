@@ -27,5 +27,19 @@ public:
      * @return The predict value of given data.
      */
     virtual double predict(const double input) const = 0;
+
+    /**
+     * @brief Function to return the randomised startvalue of myBias.
+     * 
+     * @return Startvalue of myBias.
+     */
+    virtual double getBias() const noexcept = 0;
+
+    /**
+     * @brief Function to return the randomised startvalue of myWeight.
+     * 
+     * @return Startvalue of myWeight.
+     */
+    virtual double getWeight() const noexcept = 0;
 };
 } // Namespace ml::lin_reg

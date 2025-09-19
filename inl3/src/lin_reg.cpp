@@ -3,6 +3,7 @@
 #include <cmath>
 #include <algorithm> // for std::shuffle
 #include <random>
+#include <iostream>
 
 namespace ml::lin_reg
 {
@@ -13,16 +14,26 @@ LinReg::LinReg(const std::vector<double>& trainInput,
                     myTrainOutput{trainOutput},  
                     myTrainSetCount(static_cast<unsigned>(
                     std::min(trainInput.size(), trainOutput.size()))),
-                    myBias{0.5},
-                    myWeight{0.5},
                     myPredVector(myTrainSetCount)
 {
-    myIndex.reserve(myTrainSetCount); // Tell vector how many elements it will contain to not allocate vector. 
+    // Random generator and uniform.
+    static std::mt19937 gen{std::random_device{}()};
+    std::uniform_real_distribution<double> dist (0.0, 1.0);
+
+    // Assign random values.
+    myBias = dist(gen);
+    myWeight = dist(gen);
+    
+    // Print the startvalues.
+    std::cout << "Bias startvalue: " << myBias << "\n";
+    std::cout << "Weight startvalue: " << myWeight << "\n";
+
+    myIndex.resize(myTrainSetCount); // Tell vector how many elements it will contain to not allocate vector. 
 
     // Loop to add the indexes in the trainingdata to the vector myIndex.
     for (std::size_t i{0}; i < myTrainSetCount; i++)
     {
-        myIndex.push_back(i);
+        myIndex[i] = i;
     }
 }   
 //--------------------------------------------------------------------------------//
@@ -113,11 +124,14 @@ int LinReg::getEpochsUsed() const noexcept
     return myEpochsUsed;
 }
 //--------------------------------------------------------------------------------//
+double LinReg::getBias() const noexcept {return myBias; }
+//--------------------------------------------------------------------------------//
+double LinReg::getWeight() const noexcept {return myWeight; }
+//--------------------------------------------------------------------------------//
 void LinReg::shuffleIndex() noexcept
 {
     static std::mt19937 gen{std::random_device{}()};
     std::shuffle(myIndex.begin(), myIndex.end(), gen);
-
 }
 } //namespace ml::lin_reg
 

@@ -69,6 +69,20 @@ public:
      * specified epochs are used then return the value of the given amount.
      */
     int getEpochsUsed() const noexcept override;
+    
+    /**
+     * @brief Function to return the randomised startvalue of myBias.
+     * 
+     * @return Startvalue of myBias.
+     */
+    double getBias() const noexcept override;
+
+    /**
+     * @brief Function to return the randomised startvalue of myWeight.
+     * 
+     * @return Startvalue of myWeight.
+     */
+    double getWeight() const noexcept override;
 
     LinReg() = delete;                            // Delete a car without info.
     LinReg(const LinReg&) = delete;               // Delete copy constructor.
