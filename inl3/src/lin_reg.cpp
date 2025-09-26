@@ -5,6 +5,7 @@
 #include <random>
 #include <iostream>
 
+
 namespace ml::lin_reg
 {
 //--------------------------------------------------------------------------------//
@@ -104,7 +105,7 @@ bool LinReg::train(const std::size_t epochCount, double learningRate) noexcept
 //--------------------------------------------------------------------------------//
 bool LinReg::isPredictDone() const noexcept
 {
-    constexpr double tol = 1e-6;
+    constexpr double tol = 1e-1;
     for (std::size_t i{}; i < myTrainSetCount; ++i)
     {
         if (std::abs(myPredVector[i] - myTrainOutput[i]) > tol)

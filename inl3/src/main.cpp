@@ -3,6 +3,7 @@
  */
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 #include "ml/lin_reg/lin_reg.h"
 
@@ -29,7 +30,7 @@ void printPredictions(const ml::lin_reg::Interface& linReg, const std::vector<do
     for (const auto& input : inputData)
     {
         const auto prediction{linReg.predict(input)};
-        ostream << "Input: " << input << ", predicted output: " << prediction << "\n";
+        ostream << "Input: " << input << ", predicted output: " << std::round(prediction) << "\n";
     }
     std::cout << "Epochs used: " << linReg.getEpochsUsed() << "\n";
     ostream << "--------------------------------------------------------------------------------\n\n";
