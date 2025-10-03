@@ -1,6 +1,8 @@
 /**
  * @brief Interface for neural network functions
  */
+#pragma once
+#include <vector>
 
 namespace ml::neural_network {
 
@@ -20,6 +22,6 @@ public:
      * 
      * @return The predictet value.
      */
-    virtual const std::vector<double>& predict(std::vector<double>& input) const = 0;
-}
+    virtual const std::vector<double>& predict(const std::vector<double>& input) = 0;
+};
 } // namespace ml::neural_network
