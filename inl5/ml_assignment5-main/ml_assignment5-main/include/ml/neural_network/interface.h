@@ -1,7 +1,13 @@
+/** 
+ * @note Ditt interface är utmärkt! Jag lade till ett mellanrum mellan #pragma once och ditt 
+ *       include-direktiv, annars är det perfekt. 
+ */
+
 /**
  * @brief Interface for neural network functions
  */
 #pragma once
+
 #include <vector>
 
 namespace ml::neural_network {
