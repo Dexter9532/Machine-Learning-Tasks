@@ -1,7 +1,9 @@
+/** @note Snyggt jobbat här med! */
 /**
  * @brief Cpp-file for neural network functions
  */
 #include <algorithm>
+//! @note Lade till mellanrum här. Jag har samma kommentar om headersortering här med.
 #include "ml/neural_network/single_layer.h"
 #include "ml/dense_layer/interface.h"
 
@@ -12,6 +14,7 @@ SingleLayer::SingleLayer(ml::dense_layer::Interface& hiddenLayer,
                         ml::dense_layer::Interface& outputLayer,
                         const std::vector<std::vector<double>>& trainInput,
                         const std::vector<std::vector<double>>& trainOutput)
+                //! @note Indraget är på tok för kraftigt, fyra blanka steg räcker.
                 :   myHiddenLayer{hiddenLayer},
                     myOutputLayer{outputLayer},
                     myTrainInput{trainInput},
@@ -24,6 +27,7 @@ SingleLayer::SingleLayer(ml::dense_layer::Interface& hiddenLayer,
 //--------------------------------------------------------------------------------//
 const std::vector<double>& SingleLayer::predict(const std::vector<double>& input) noexcept
 {    
+    //! @note Lägg gärna inline-kommentarer ovanför funktionerna, som du gjorde i train nedan. :)
     myHiddenLayer.feedforward(input);                    // run feedforward on the hidden layer with the input values
     myOutputLayer.feedforward(myHiddenLayer.output());   // run feedforward on the output layer using the hidden layer's output as input
     return myOutputLayer.output(); 
@@ -31,10 +35,13 @@ const std::vector<double>& SingleLayer::predict(const std::vector<double>& input
 //--------------------------------------------------------------------------------//
 bool SingleLayer::train( std::size_t epochCount, double learningrate) noexcept
 {
+    //! Utmärkt med Yoda notation och parenteser.
     if ((0U == epochCount) || (0.0 >= learningrate)) { return false;}
 
+    //! Använd hellre {} än = för initiering; std::size_t epoch{} eller std::size_t epoch{0U}.
     for (std::size_t epoch = 0; epoch < epochCount; ++epoch) 
     {
+        //! @note Snyggt jobbat med koden här! :)
         for (std::size_t k{}; k < myTrainSetCount; k++)
         {
             // (a) forward: hidden then output

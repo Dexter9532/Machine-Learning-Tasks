@@ -1,7 +1,15 @@
+/** @note Din SingleLayer-klasser är också utmärkt! Jag har några små kommentarer dock, se nedan. */
+
 /**
  * @brief Header-file for neural network functions
  */
 #pragma once 
+
+//! @note Du bör inkludera <vector> här istället för att förlita dig på att denna är inkluderad i 
+//!       interfacet. Bästa praxis är att inkludera alla headers som används direkt för att
+//!       dependencies (och undvika varningar från kodanalysverktyg och dylikt).
+
+//! @note Sortera headerfiler alfabetiskt.
 #include "ml/neural_network/interface.h"
 #include "ml/dense_layer/interface.h"
 
@@ -23,6 +31,8 @@ public:
                         const std::vector<std::vector<double>>& trainInput,
                         const std::vector<std::vector<double>>& trainOutput);
 
+    //! @note Destruktorn raderar inte konstruktorn; den raderar instansen som konstruktorn har skapat.
+    //!       Men det är ingen biggie; det räcket att skriva @brief Destructor på destruktorer anser jag.
     /**
      * @brief Delete the constructor
      */
