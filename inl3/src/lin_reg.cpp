@@ -118,11 +118,16 @@ bool LinReg::isPredictDone() const noexcept
 //--------------------------------------------------------------------------------//
 int LinReg::getEpochsUsed() const noexcept 
 {
+    //! @note  Kör gärna yoda här, precis som ovan (if 0U == myEpochsUsed).
     if (myEpochsUsed == 0)
     { 
         return myEpochCount;
     } 
     return myEpochsUsed;
+
+    //! @note Vill bara påpeka att du även kan skriva följande om du vill hålla det mer kompakt:
+    //! return 0U == myEpochsUser ? myEpochCount : myEpochsUsed;
+    //! Detta är dock inte bättre än vad du gjorde på något sätt.
 }
 //--------------------------------------------------------------------------------//
 double LinReg::getBias() const noexcept {return myBias; }
@@ -135,4 +140,3 @@ void LinReg::shuffleIndex() noexcept
     std::shuffle(myIndex.begin(), myIndex.end(), gen);
 }
 } //namespace ml::lin_reg
-
